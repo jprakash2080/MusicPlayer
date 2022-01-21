@@ -11,18 +11,14 @@ import SwiftUI
 struct MusicDataModel:Decodable{
     var musicData: PlayingMusic_Base!
     init(music: PlayingMusic_Base? = nil){
-        
-        
+    
         if music != nil{
             self.musicData = music!
         }else{
             self.musicData = PlayingMusic_Base()
         }
-        
     }
-    
     var imageurl: UIImage {
-        //return  ImageStore.shared.image(name:((self.music.image_url?.first?!)!))
         if self.musicData.image_url == "" || self.musicData.image_url == nil{
             return  UIImage(imageLiteralResourceName:"noimage")
         }
@@ -60,5 +56,3 @@ struct PlayingMusic_Base : Decodable {
         case played_at = "played_at"
     }
 }
-
-

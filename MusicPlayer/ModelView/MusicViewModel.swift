@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
+//get current playing music
 final class PlayingMusicModel: ObservableObject {
     
     // Music View Model ObsevebleObject
@@ -18,21 +19,21 @@ final class PlayingMusicModel: ObservableObject {
         didSet { didChange.send() }
     }
   
-    init(){ //Webservice load funcation
+    init(){ //Webservice load function
         loadPlayingMusic()
     }
     
     func loadPlayingMusic() {
         APIServices().apiToGetPlayingMusic{ playingmusic in
             DispatchQueue.main.async {
-                //getter and setter call for ArticelObjectModel
+                //getter and setter call for MusicDataModel
                 self.playingMusic = MusicDataModel(music:playingmusic)
             }
         }
     }
 }
 
-
+//Load recent played music
 final class RecentMusicModel: ObservableObject {
     
     // Music View Model ObsevebleObject
@@ -41,14 +42,14 @@ final class RecentMusicModel: ObservableObject {
         didSet { didChange.send() }
     }
   
-    init(){ //Webservice load funcation
+    init(){ //Webservice load function
        loadRecentMusic()
     }
     
     private func loadRecentMusic() {
         APIServices().apiToGetRecentMusic{ music in
             DispatchQueue.main.async {
-                //getter and setter call for ArticelObjectModel
+                //getter and setter call for MusicDataModel
                 self.musicList = music.map(MusicDataModel.init)
             }
         }
